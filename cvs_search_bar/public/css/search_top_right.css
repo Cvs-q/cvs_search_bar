@@ -53,6 +53,11 @@ body.cvs-top-search-on .page-head .navbar-modal-search-mobile {
 	display: none !important;
 }
 
+/* /desk start page: hide the centered search once ours is in the right-hand group. */
+.desktop-navbar:has(.cvs-top-search) .search-widget-wrapper {
+	display: none !important;
+}
+
 /* Narrower windows: a slimmer search box leaves room for the page title and buttons. */
 @media (max-width: 1500px) {
 	.cvs-top-search {

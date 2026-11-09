@@ -78,6 +78,13 @@
 			section.insertBefore(createButton(), section.firstChild);
 		});
 
+		// The /desk start page has its own top bar (centered search, then bell and avatar on the
+		// right). Put the search at the start of the right-hand group; the CSS hides the centered one.
+		const navRight = document.querySelector(".desktop-navbar > .flex");
+		if (navRight && !navRight.querySelector(":scope > .cvs-top-search")) {
+			navRight.insertBefore(createButton(), navRight.firstChild);
+		}
+
 		document.body.classList.add("cvs-top-search-on");
 	}
 
