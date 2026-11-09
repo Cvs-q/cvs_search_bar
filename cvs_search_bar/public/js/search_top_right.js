@@ -37,40 +37,46 @@
 		}
 	}
 
+	function createButton() {
+		const button = document.createElement("button");
+		button.className = "cvs-top-search";
+		button.type = "button";
+		button.setAttribute("aria-label", __("Search or type a command"));
+		button.setAttribute("aria-haspopup", "dialog");
+		button.title = __("Search or type a command (Ctrl + K)");
+
+		const label = document.createElement("span");
+		label.className = "cvs-top-search-text";
+		label.textContent = __("Search or type a command");
+
+		const shortcut = document.createElement("span");
+		shortcut.className = "cvs-top-search-shortcut";
+		shortcut.textContent = frappe.utils.is_mac() ? "\u2318K" : "Ctrl+K";
+
+		button.innerHTML = frappe.utils.icon("search", "sm");
+		button.append(label, shortcut);
+		button.addEventListener("click", openSearch);
+		return button;
+	}
+
+	// The search box goes inside each page header, as the first item of the right-hand group,
+	// so it sits on the same line with the page's own buttons (Actions, refresh, menu ...)
+	// to its right, however many buttons that page has.
 	function syncSearch() {
 		if (!window.frappe?.boot?.desk_settings || !frappe.app) return;
 
 		const enabled = Boolean(frappe.boot.desk_settings.search_bar);
-		let button = document.getElementById("cvs-top-search");
 
 		if (!enabled) {
-			button?.remove();
+			document.querySelectorAll(".cvs-top-search").forEach((el) => el.remove());
 			document.body.classList.remove("cvs-top-search-on");
 			return;
 		}
 
-		if (!button) {
-			button = document.createElement("button");
-			button.id = "cvs-top-search";
-			button.className = "cvs-top-search";
-			button.type = "button";
-			button.setAttribute("aria-label", __("Search or type a command"));
-			button.setAttribute("aria-haspopup", "dialog");
-			button.title = __("Search or type a command (Ctrl + K)");
-
-			const label = document.createElement("span");
-			label.className = "cvs-top-search-text";
-			label.textContent = __("Search or type a command");
-
-			const shortcut = document.createElement("span");
-			shortcut.className = "cvs-top-search-shortcut";
-			shortcut.textContent = frappe.utils.is_mac() ? "⌘K" : "Ctrl+K";
-
-			button.innerHTML = frappe.utils.icon("search", "sm");
-			button.append(label, shortcut);
-			button.addEventListener("click", openSearch);
-			document.body.appendChild(button);
-		}
+		document.querySelectorAll(".page-head .standard-items-section").forEach((section) => {
+			if (section.querySelector(":scope > .cvs-top-search")) return;
+			section.insertBefore(createButton(), section.firstChild);
+		});
 
 		document.body.classList.add("cvs-top-search-on");
 	}

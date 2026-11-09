@@ -1,15 +1,13 @@
-/* Full search trigger at the upper right. */
-#cvs-top-search {
-	position: fixed;
-	top: 8px;
-	right: 100px;
-	z-index: 1030;
+/* Search box in the page header: first item of the right-hand group, buttons to its right. */
+.cvs-top-search {
 	display: flex !important;
 	align-items: center;
 	gap: 8px;
-	width: 320px !important;
-	max-width: calc(100vw - 120px);
+	flex: 0 1 320px;
+	width: 320px;
+	min-width: 160px;
 	height: 32px;
+	margin-right: 12px;
 	padding: 0 10px;
 	border: 1px solid var(--border-color, #e2e2e2);
 	border-radius: 8px;
@@ -21,20 +19,20 @@
 	cursor: pointer;
 }
 
-#cvs-top-search:hover {
+.cvs-top-search:hover {
 	background: var(--control-bg-on-gray, #ebebeb);
 }
 
-#cvs-top-search:focus-visible {
+.cvs-top-search:focus-visible {
 	outline: 2px solid var(--primary, #2490ef);
 	outline-offset: 2px;
 }
 
-#cvs-top-search .icon {
+.cvs-top-search .icon {
 	flex-shrink: 0;
 }
 
-#cvs-top-search .cvs-top-search-text {
+.cvs-top-search .cvs-top-search-text {
 	display: inline !important;
 	flex: 1;
 	min-width: 0;
@@ -55,26 +53,39 @@ body.cvs-top-search-on .page-head .navbar-modal-search-mobile {
 	display: none !important;
 }
 
-/* Reserve room in workspace headers. */
-body.cvs-top-search-on .page-head .page-head-content {
-	padding-right: 440px;
+/* Narrower windows: a slimmer search box leaves room for the page title and buttons. */
+@media (max-width: 1500px) {
+	.cvs-top-search {
+		flex-basis: 220px;
+		width: 220px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.cvs-top-search {
+		flex-basis: 170px;
+		width: 170px;
+		min-width: 170px;
+	}
+
+	.cvs-top-search .cvs-top-search-shortcut {
+		display: none;
+	}
 }
 
 /* Only collapse to an icon on small phones. */
 @media (max-width: 575px) {
-	#cvs-top-search {
-		right: 60px;
-		width: 32px !important;
+	.cvs-top-search {
+		flex: 0 0 32px;
+		width: 32px;
+		min-width: 32px;
+		margin-right: 8px;
 		padding: 0;
 		justify-content: center;
 	}
 
-	#cvs-top-search .cvs-top-search-text,
-	#cvs-top-search .cvs-top-search-shortcut {
+	.cvs-top-search .cvs-top-search-text,
+	.cvs-top-search .cvs-top-search-shortcut {
 		display: none !important;
-	}
-
-	body.cvs-top-search-on .page-head .page-head-content {
-		padding-right: 104px;
 	}
 }
