@@ -1,7 +1,7 @@
 /* Full search trigger at the upper right. */
 #cvs-top-search {
 	position: fixed;
-	top: 13px;
+	top: 8px;
 	right: 100px;
 	z-index: 1030;
 	display: flex !important;
