@@ -1,0 +1,7 @@
+Copyright (c) 2026 CVS. All rights reserved.
+
+CVS Search Bar was developed by Iftikhar Hussain Syed
+(iftikhar.hussain@cvshvac.com) for internal use at CVS.
+
+This software is proprietary. It may not be copied, distributed, sublicensed
+or used outside CVS without written permission.
